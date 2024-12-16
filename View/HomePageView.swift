@@ -1,8 +1,11 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @State private var reservation1 = "予約 1"
-    @State private var reservation2 = "予約 2"
+    @State private var reservation1 = "予約希望日"
+    @State private var reservation2 = "待ち合わせ時間"
+    @State private var reservation3 = "待ち合わせ場所"
+    @State private var reservation4 = "待ち合わせ場所(詳細)"
+    @State private var reservation5 = "通訳内容"
     @State private var showReservationForm = false
 
     var body: some View {
@@ -37,6 +40,12 @@ struct HomePageView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(reservation2)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(reservation3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(reservation4)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(reservation5)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding()
                 .frame(width: geometry.size.width - 20)
@@ -45,7 +54,7 @@ struct HomePageView: View {
                         .stroke(Color.gray, lineWidth: 2)
                 )
             }
-            .frame(height: 150)
+            .frame(height: 200)
             .padding([.leading, .trailing], 10)
 
             List {
@@ -55,7 +64,7 @@ struct HomePageView: View {
         }
         .padding()
         .sheet(isPresented: $showReservationForm) {
-            ReservationFormView(reservation1: $reservation1, reservation2: $reservation2)
+            ReservationFormView(reservation1: $reservation1, reservation2: $reservation2, reservation3: $reservation3, reservation4: $reservation4, reservation5: $reservation5)
         }
     }
 }

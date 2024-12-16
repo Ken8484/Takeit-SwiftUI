@@ -7,9 +7,9 @@
 
 import Foundation
 struct ReservationData{
-    var date = ""
-    var timehour = ""
-    var timeminute = ""
+    var date: Date?
+    var timehour: Int?
+    var timeminute: Int?
     var place = ""
     var placedetail = ""
     var bikou = ""
