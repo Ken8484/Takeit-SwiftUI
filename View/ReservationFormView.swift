@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ReservationFormView: View {
-    @Binding var reservation1: String
-    @Binding var reservation2: String
-    @Binding var reservation3: String
-    @Binding var reservation4: String
-    @Binding var reservation5: String
-    @State private var reservationDate = Date()
+    @Binding var reservationDate: String
+    @Binding var reservationTime: String
+    @Binding var reservationPlace: String
+    @Binding var reservationDetails: String
+    @Binding var reservationNotes: String
+    
     @State private var selectedTimeHour = 9
     @State private var selectedTimeMinute = 0
     @State private var location = ""
@@ -14,6 +14,14 @@ struct ReservationFormView: View {
     @State private var interpreter = ""
     @State private var bikou = ""
     @State private var reservationContent = ""
+    
+    @State private var selectedDate = Date()
+    @State private var selectedHour = 9
+    @State private var selectedMinute = 0
+    @State private var meetingPlace = ""
+    @State private var placeDetails = ""
+    @State private var additionalNotes = ""
+
     
 
     let hours = Array(9...21)
@@ -25,45 +33,50 @@ struct ReservationFormView: View {
         NavigationStack {
             Form {
                 Section(header: Text("予約希望日")) {
-                    DatePicker("予約希望日", selection: $reservationDate, displayedComponents: .date)
+                    DatePicker("予約希望日", selection: $selectedDate, displayedComponents: .date)
                 }
 
                 Section(header: Text("待ち合わせ時間")) {
-                    Picker("時間", selection: $selectedTimeHour) {
+                    Picker("時間", selection: $selectedHour) {
                         ForEach(hours, id: \.self) { Text("\($0)時") }
                     }
-                    Picker("分", selection: $selectedTimeMinute) {
+                    Picker("分", selection: $selectedMinute) {
                         ForEach(minutes, id: \.self) { Text("\($0)分") }
                     }
                 }
 
                 Section(header: Text("待ち合わせ場所")) {
-                    TextField("待ち合わせ場所", text: $location)
+                    TextField("待ち合わせ場所", text: $meetingPlace)
                 }
 
                 Section(header: Text("待ち合わせ場所(詳細)")) {
-                    TextField("詳細", text: $locationdetails)
+                    TextField("詳細", text: $placeDetails)
                 }
 
                 Section(header: Text("通訳内容")) {
-                    TextField("通訳内容", text: $reservationContent)
+                    TextField("通訳内容", text: $additionalNotes)
                 }
 
                 
                 }
-                .padding()
-                .background(Color.green.opacity(0.3))
-                .cornerRadius(8)
-            
-            Button("予約内容を保存") {
-                reservation1 = "予約希望日: \(reservationDate.formatted())"
-                reservation2 = "待ち合わせ時間: \(selectedTimeHour)時\(selectedTimeMinute)分"
-                reservation3 = "待ち合わせ場所: \(location) "
-                reservation4 = "待ち合わせ場所(詳細): \(locationdetails) "
-                reservation5 = "通訳内容: \(reservationContent) "
-                dismiss()
                 
-            }
+            
+            HStack {
+                
+                                Button("予約内容を保存") {
+                                    reservationDate = "予約希望日: \(selectedDate.formatted())"
+                                    reservationTime = "待ち合わせ時間: \(selectedHour)時\(selectedTimeMinute)分"
+                                    reservationPlace = "待ち合わせ場所: \(meetingPlace) "
+                                    reservationDetails = "待ち合わせ場所(詳細): \(placeDetails) "
+                                    reservationNotes = "通訳内容: \(additionalNotes) "
+                                    dismiss()
+                                }
+                            }
+            .padding()
+            .background(Color.green.opacity(0.3))
+            .cornerRadius(8)
+            Spacer()
+            
         
             .navigationTitle("予約画面")
         }

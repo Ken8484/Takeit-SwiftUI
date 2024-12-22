@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @State private var reservation1 = "予約希望日"
-    @State private var reservation2 = "待ち合わせ時間"
-    @State private var reservation3 = "待ち合わせ場所"
-    @State private var reservation4 = "待ち合わせ場所(詳細)"
-    @State private var reservation5 = "通訳内容"
+    @State private var reservationDate = "予約希望日"
+    @State private var reservationTime = "待ち合わせ時間"
+    @State private var reservationPlace = "待ち合わせ場所"
+    @State private var reservationDetails = "待ち合わせ場所(詳細)"
+    @State private var reservationNotes = "通訳内容"
     @State private var showReservationForm = false
 
     var body: some View {
@@ -27,6 +27,7 @@ struct HomePageView: View {
                         .background(Color.green.opacity(0.3))
                         .cornerRadius(8)
                         .frame(maxWidth: .infinity)
+                    
                 }
             }
             .padding([.leading, .trailing], 10)
@@ -36,15 +37,15 @@ struct HomePageView: View {
                     Text("今週の予約")
                         .font(.headline)
                         .padding(.top)
-                    Text(reservation1)
+                    Text(reservationDate)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(reservation2)
+                    Text(reservationTime)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(reservation3)
+                    Text(reservationPlace)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(reservation4)
+                    Text(reservationDetails)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(reservation5)
+                    Text(reservationNotes)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding()
@@ -64,7 +65,7 @@ struct HomePageView: View {
         }
         .padding()
         .sheet(isPresented: $showReservationForm) {
-            ReservationFormView(reservation1: $reservation1, reservation2: $reservation2, reservation3: $reservation3, reservation4: $reservation4, reservation5: $reservation5)
+            ReservationFormView(reservationDate: $reservationDate, reservationTime: $reservationTime, reservationPlace: $reservationPlace, reservationDetails: $reservationDetails, reservationNotes: $reservationNotes)
         }
     }
 }
