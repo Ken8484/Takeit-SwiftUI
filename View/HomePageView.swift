@@ -47,6 +47,17 @@ struct HomePageView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(reservationNotes)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    HStack {
+                        Button("予約内容を編集") {
+                            
+                        }
+                    }
+                    
+                    .padding()
+                    .background(Color.green.opacity(0.2))
+                    .cornerRadius(8)
+                    Spacer()
                 }
                 .padding()
                 .frame(width: geometry.size.width - 20)
@@ -54,8 +65,10 @@ struct HomePageView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.gray, lineWidth: 2)
                 )
+                .frame(width: geometry.size.width - 10) // 横幅は保持
+                
             }
-            .frame(height: 200)
+            
             .padding([.leading, .trailing], 10)
 
             List {

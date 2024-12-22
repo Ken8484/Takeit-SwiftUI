@@ -7,14 +7,6 @@ struct ReservationFormView: View {
     @Binding var reservationDetails: String
     @Binding var reservationNotes: String
     
-    @State private var selectedTimeHour = 9
-    @State private var selectedTimeMinute = 0
-    @State private var location = ""
-    @State private var locationdetails = ""
-    @State private var interpreter = ""
-    @State private var bikou = ""
-    @State private var reservationContent = ""
-    
     @State private var selectedDate = Date()
     @State private var selectedHour = 9
     @State private var selectedMinute = 0
@@ -65,7 +57,7 @@ struct ReservationFormView: View {
                 
                                 Button("予約内容を保存") {
                                     reservationDate = "予約希望日: \(selectedDate.formatted())"
-                                    reservationTime = "待ち合わせ時間: \(selectedHour)時\(selectedTimeMinute)分"
+                                    reservationTime = "待ち合わせ時間: \(selectedHour)時\(selectedMinute)分"
                                     reservationPlace = "待ち合わせ場所: \(meetingPlace) "
                                     reservationDetails = "待ち合わせ場所(詳細): \(placeDetails) "
                                     reservationNotes = "通訳内容: \(additionalNotes) "
