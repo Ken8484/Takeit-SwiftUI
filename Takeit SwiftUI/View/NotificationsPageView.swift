@@ -9,9 +9,17 @@ import SwiftUI
 
 struct NotificationsPageView: View {
     var body: some View {
-        Text("NotificationsConten")
+        Text("NotificationsContents")
+        
+        List {
+            Text("お知らせ1")
+            Text("お知らせ2")
+        }
     }
+    
+    
 }
+
 
 #Preview {
     NotificationsPageView()

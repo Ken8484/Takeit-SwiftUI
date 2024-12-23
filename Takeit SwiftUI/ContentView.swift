@@ -4,7 +4,7 @@ struct ContentView: View {
     @State private var selection = 1
     @State private var showSettings = false
     @State private var showNotifications = false
-
+    
     var body: some View {
         NavigationStack {
             VStack {
