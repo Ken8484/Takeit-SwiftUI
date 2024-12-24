@@ -52,11 +52,11 @@ struct ReservationFormView: View {
                 HStack {
                     Spacer()
                     Button("予約内容を保存") {
-                        reservationDate = "予約希望日: \(selectedDate.formatted())"
-                        reservationTime = "待ち合わせ時間: \(selectedHour)時\(selectedMinute)分"
-                        reservationPlace = "待ち合わせ場所: \(meetingPlace) "
-                        reservationDetails = "待ち合わせ場所(詳細): \(placeDetails) "
-                        reservationNotes = "通訳内容: \(additionalNotes) "
+                        reservationDate = "\(selectedDate.formatted())"
+                        reservationTime = "\(selectedHour)時\(selectedMinute)分"
+                        reservationPlace = "\(meetingPlace)"
+                        reservationDetails = "\(placeDetails)"
+                        reservationNotes = "\(additionalNotes) "
                         
                         dismiss()
                         
