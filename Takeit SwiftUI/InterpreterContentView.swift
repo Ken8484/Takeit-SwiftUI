@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct InterpreterContentView: View {
     @State private var selection = 1
     @State private var showSettings = false
     @State private var showNotifications = false
@@ -9,7 +9,7 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 TabView(selection: $selection) {
-                    HomePageView()
+                    InterpreterHomePageView()
                         .tabItem {
                             Label("ホーム", systemImage: "house")
                         }
@@ -67,5 +67,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    InterpreterContentView()
 }

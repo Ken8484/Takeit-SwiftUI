@@ -1,7 +1,6 @@
 import SwiftUI
 
-
-struct HomePageView: View {
+struct InterpreterHomePageView: View {
     @State private var reservationDate = ""
     @State private var reservationTime = ""
     @State private var reservationPlace = ""
@@ -73,7 +72,7 @@ struct HomePageView: View {
                 Button(action: {
                     showReservationForm.toggle()
                 }) {
-                    Text("予約画面")
+                    Text("予約希望一覧")
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color.green.opacity(0.3))
