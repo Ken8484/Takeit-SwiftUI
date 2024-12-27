@@ -20,6 +20,7 @@ struct ReservationFormView: View {
     let minutes = Array(0..<60).filter { $0 % 5 == 0 }
     
     @Environment(\.dismiss) private var dismiss
+    private let firestoreManager = FirestoreManager () //追加
     
     var body: some View {
         NavigationStack {
@@ -50,18 +51,35 @@ struct ReservationFormView: View {
                 }
                 
                 HStack {
-                    Spacer()
-                    Button("予約内容を保存") {
-                        reservationDate = "\(selectedDate.formatted())"
-                        reservationTime = "\(selectedHour)時\(selectedMinute)分"
-                        reservationPlace = "\(meetingPlace)"
-                        reservationDetails = "\(placeDetails)"
-                        reservationNotes = "\(additionalNotes) "
+                    Spacer ()
+                    Button("予約内容を保存"){
+                        let reservation = ReservationData(
+                            reservationDate: "\(selectedDate.formatted())",
+                            
+                            reservationTime: "\(selectedHour)時\(selectedMinute)分",
+                            reservationPlace: "\(meetingPlace)",
+                            reservationDetails: "\(placeDetails)",
+                            reservationNotes: "\(additionalNotes)",
+                            isReserved: false
+                        )
+                        reservationDate = reservation.reservationDate
+                        reservationPlace = reservation.reservationPlace
+                        reservationTime = reservation.reservationTime
+                        reservationDetails = reservation.reservationDetails
+                        reservationNotes = reservation.reservationNotes
                         
-                        dismiss()
                         
+                        firestoreManager.saveReservation(reservation){ error in
+                            if let error = error {
+                                print("Error saving reservation: \(error.localizedDescription)")
+                            }
+                            else {
+                                print ("Reservation saved successfully")
+                                dismiss ()
+                            }
+                        }
                     }
-                    Spacer()
+                    Spacer ( )
                 }
             }
             .padding()

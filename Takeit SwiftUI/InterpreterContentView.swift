@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct InterpreterContentView: View {
+
     @State private var selection = 1
     @State private var showSettings = false
     @State private var showNotifications = false
+    
+    private let firestoreManager = FirestoreManager()
     
     var body: some View {
         NavigationStack {

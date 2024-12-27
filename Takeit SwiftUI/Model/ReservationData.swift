@@ -1,17 +1,11 @@
-//
-//  ReservationData.swift
-//  Takeit SwiftUI
-//
-//  Created by 小田桐健太郎 on 2024/12/13.
-//
-
 import Foundation
-struct ReservationData{
-    var date: Date?
-    var timehour: Int?
-    var timeminute: Int?
-    var place = ""
-    var placedetail = ""
-    var bikou = ""
-    
+
+struct ReservationData: Identifiable, Codable {
+    var id = UUID()
+    var reservationDate: String
+    var reservationTime: String
+    var reservationPlace: String
+    var reservationDetails: String
+    var reservationNotes: String
+    var isReserved: Bool
 }

@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct InterpreterHomePageView: View {
+    @State private var reservations: [ReservationData] = []
     @State private var reservationDate = ""
     @State private var reservationTime = ""
     @State private var reservationPlace = ""
     @State private var reservationDetails = ""
     @State private var reservationNotes = ""
     @State private var showReservationForm = false
+    
+    
+    private let firestoreManager = FirestoreManager()
     
     var body: some View {
         VStack(spacing: 16) {
@@ -77,17 +81,17 @@ struct InterpreterHomePageView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color.green.opacity(0.3))
                         .cornerRadius(8)
-                        
+                    
                 }
             }
             Text("他の予約一覧" )
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            List {
-                HStack{
-                    Text("2025/12/22")
-                        .foregroundStyle(Color.gray)
-                    Text("弘前公園")
+            List(reservations) { reservation in
+                HStack {
+                    Text (reservation.reservationDate)
+                        .foregroundStyle (Color.gray)
+                    Text (reservation.reservationPlace)
                 }
             }
         }
@@ -95,9 +99,23 @@ struct InterpreterHomePageView: View {
         .sheet(isPresented: $showReservationForm) {
             ReservationFormView(reservationDate: $reservationDate, reservationTime: $reservationTime, reservationPlace: $reservationPlace, reservationDetails: $reservationDetails, reservationNotes: $reservationNotes)
         }
+        .onAppear{
+            fetchReservations()
+        }
     }
+    
+    private func fetchReservations() {
+        firestoreManager.fetchReservations { fetchedReservations , error in
+            if let error = error {
+                print("Error fetching reservations: \(error.localizedDescription)")
+                return
+            }
+            reservations = fetchedReservations ?? []
+        }
+    }
+    
+    
 }
-
 #Preview {
-    HomePageView()
+    InterpreterHomePageView()
 }
