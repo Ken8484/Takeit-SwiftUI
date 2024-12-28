@@ -8,6 +8,7 @@ struct InterpreterHomePageView: View {
     @State private var reservationDetails = ""
     @State private var reservationNotes = ""
     @State private var showReservationForm = false
+    @State private var isEmergency = false
     
     
     private let firestoreManager = FirestoreManager()
@@ -97,7 +98,7 @@ struct InterpreterHomePageView: View {
         }
         .padding()
         .sheet(isPresented: $showReservationForm) {
-            ReservationFormView(reservationDate: $reservationDate, reservationTime: $reservationTime, reservationPlace: $reservationPlace, reservationDetails: $reservationDetails, reservationNotes: $reservationNotes)
+            ReservationFormView(reservationDate: $reservationDate, reservationTime: $reservationTime, reservationPlace: $reservationPlace, reservationDetails: $reservationDetails, reservationNotes: $reservationNotes, isEmergency: $isEmergency)
         }
         .onAppear{
             fetchReservations()

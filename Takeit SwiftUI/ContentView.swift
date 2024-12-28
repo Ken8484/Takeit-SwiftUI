@@ -17,7 +17,7 @@ struct ContentView: View {
                     
                     LeafPageView()
                         .tabItem {
-                            Label("Leaf", systemImage: "leaf")
+                            Label("未承諾予約", systemImage: "leaf")
                         }
                         .tag(2)
                     

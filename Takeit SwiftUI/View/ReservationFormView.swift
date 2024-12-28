@@ -1,11 +1,13 @@
 import SwiftUI
 
 struct ReservationFormView: View {
+   
     @Binding var reservationDate: String
     @Binding var reservationTime: String
     @Binding var reservationPlace: String
     @Binding var reservationDetails: String
     @Binding var reservationNotes: String
+    @Binding var isEmergency: Bool
     
     @State private var selectedDate = Date()
     @State private var selectedHour = 9
@@ -13,6 +15,7 @@ struct ReservationFormView: View {
     @State private var meetingPlace = ""
     @State private var placeDetails = ""
     @State private var additionalNotes = ""
+ 
     
     
     
@@ -23,6 +26,7 @@ struct ReservationFormView: View {
     private let firestoreManager = FirestoreManager () //追加
     
     var body: some View {
+        
         NavigationStack {
             Form {
                 Section(header: Text("予約希望日")) {
@@ -49,6 +53,7 @@ struct ReservationFormView: View {
                 Section(header: Text("通訳内容")) {
                     TextField("通訳内容", text: $additionalNotes)
                 }
+                Toggle("緊急", isOn: $isEmergency)
                 
                 HStack {
                     Spacer ()
@@ -61,6 +66,7 @@ struct ReservationFormView: View {
                             reservationDetails: "\(placeDetails)",
                             reservationNotes: "\(additionalNotes)",
                             isReserved: false
+                            
                         )
                         reservationDate = reservation.reservationDate
                         reservationPlace = reservation.reservationPlace
@@ -87,7 +93,9 @@ struct ReservationFormView: View {
             Spacer()
             
             
+                //.navigationTitle("予約画面")
                 .navigationTitle("予約画面")
+                            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

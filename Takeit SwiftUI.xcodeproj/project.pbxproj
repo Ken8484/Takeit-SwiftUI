@@ -27,6 +27,7 @@
 		7C8956AE2D1D2BAC00283908 /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956AD2D1D2BAC00283908 /* ReservationData.swift */; };
 		7C8956B02D1D313700283908 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956AF2D1D313700283908 /* ViewModel.swift */; };
 		7C8956B22D1E481800283908 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956B12D1E481800283908 /* FirestoreManager.swift */; };
+		7C8956B42D1F0E5B00283908 /* CheckDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956B32D1F0E5B00283908 /* CheckDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		7C8956AD2D1D2BAC00283908 /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
 		7C8956AF2D1D313700283908 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		7C8956B12D1E481800283908 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		7C8956B32D1F0E5B00283908 /* CheckDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		7C8956372CFF492700283908 = {
 			isa = PBXGroup;
 			children = (
+				7C8956B32D1F0E5B00283908 /* CheckDetail.swift */,
 				7C8956422CFF492700283908 /* Takeit SwiftUI */,
 				7C8956412CFF492700283908 /* Products */,
 			);
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C8956682D0C36C800283908 /* SettingView.swift in Sources */,
+				7C8956B42D1F0E5B00283908 /* CheckDetail.swift in Sources */,
 				7C89566C2D0C387100283908 /* NotificationsPageView.swift in Sources */,
 				7C8956462CFF492700283908 /* ContentView.swift in Sources */,
 				7C8956AE2D1D2BAC00283908 /* ReservationData.swift in Sources */,

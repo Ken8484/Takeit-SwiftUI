@@ -2,9 +2,9 @@ import SwiftUI
 
 struct UserPageView: View {
     @State private var name: String = "山田太郎"
-    @State private var age: String = "50歳"
+    @State private var age: String = "18歳"
     @State private var gender: String = "男性"
-    @State private var occupation: String = "会社員"
+    @State private var occupation: String = "大学生"
     @State private var hearingLevel: String = "四級"
     @State private var phoneNumber: String = "0902222333"
     @State private var email: String = "taro@gmail.com"
