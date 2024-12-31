@@ -35,7 +35,7 @@ struct HomePageView: View {
                         .font(.largeTitle)
                 }
                 HStack {
-                    Text("受診内容")
+                    Text("通訳内容")
                         .foregroundStyle(Color.gray)
                     Text(reservationNotes)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,9 +92,7 @@ struct HomePageView: View {
                         .cornerRadius(8)
                 }
             }
-            Text("他の予約一覧")
-                .font(.headline)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            
             VStack(alignment: .leading, spacing: 12) {
                 Text("他の予約一覧")
                     .font(.title2)
