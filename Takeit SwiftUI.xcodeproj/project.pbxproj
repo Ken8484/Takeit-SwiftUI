@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C7E32F72D24610800BB3211 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E32F62D24610800BB3211 /* TimePickerView.swift */; };
+		7C7E32F92D2461A900BB3211 /* MapSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E32F82D2461A900BB3211 /* MapSelectionView.swift */; };
 		7C8956442CFF492700283908 /* Takeit_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956432CFF492700283908 /* Takeit_SwiftUIApp.swift */; };
 		7C8956462CFF492700283908 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8956452CFF492700283908 /* ContentView.swift */; };
 		7C8956482CFF492800283908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8956472CFF492800283908 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C7E32F62D24610800BB3211 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		7C7E32F82D2461A900BB3211 /* MapSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSelectionView.swift; sourceTree = "<group>"; };
 		7C8956402CFF492700283908 /* Takeit SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Takeit SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8956432CFF492700283908 /* Takeit_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Takeit_SwiftUIApp.swift; sourceTree = "<group>"; };
 		7C8956452CFF492700283908 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 		7C8956372CFF492700283908 = {
 			isa = PBXGroup;
 			children = (
+				7C7E32F82D2461A900BB3211 /* MapSelectionView.swift */,
+				7C7E32F62D24610800BB3211 /* TimePickerView.swift */,
 				7C8956B32D1F0E5B00283908 /* CheckDetail.swift */,
 				7C8956422CFF492700283908 /* Takeit SwiftUI */,
 				7C8956412CFF492700283908 /* Products */,
@@ -210,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C7E32F92D2461A900BB3211 /* MapSelectionView.swift in Sources */,
 				7C8956682D0C36C800283908 /* SettingView.swift in Sources */,
 				7C8956B42D1F0E5B00283908 /* CheckDetail.swift in Sources */,
 				7C89566C2D0C387100283908 /* NotificationsPageView.swift in Sources */,
@@ -223,6 +230,7 @@
 				7C8956742D1BD85800283908 /* InterpreterHomePageView.swift in Sources */,
 				7C8956B02D1D313700283908 /* ViewModel.swift in Sources */,
 				7C8956442CFF492700283908 /* Takeit_SwiftUIApp.swift in Sources */,
+				7C7E32F72D24610800BB3211 /* TimePickerView.swift in Sources */,
 				7C8956B22D1E481800283908 /* FirestoreManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
