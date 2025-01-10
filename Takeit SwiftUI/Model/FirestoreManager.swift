@@ -37,7 +37,7 @@ class FirestoreManager {
                           let reservationPlace = data["reservationPlace"] as? String,
                           let reservationDetails = data["reservationDetails"] as? String,
                           let reservationNotes = data["reservationNotes"] as? String,
-                          let isReserved = data["isReserved"] as? Bool 
+                          let isEmergency = data["isEmergency"] as? Bool
                     
                     else {
                         // 必要なフィールドが欠けていたらnilを返し除外
@@ -51,9 +51,7 @@ class FirestoreManager {
                         reservationPlace: reservationPlace,
                         reservationDetails: reservationDetails,
                         reservationNotes: reservationNotes,
-                        isReserved: isReserved
-                        
-                        
+                        isEmergency: isEmergency
                     )
                     
                     // FirestoreのdocumentIDを使いたい場合は、別のプロパティに代入する

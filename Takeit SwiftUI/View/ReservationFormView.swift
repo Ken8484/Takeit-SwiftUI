@@ -84,8 +84,10 @@ struct ReservationFormView: View {
                             reservationPlace: "\(meetingPlace)",
                             reservationDetails: "\(placeDetails)",
                             reservationNotes: "\(additionalNotes)",
-                            isReserved: false
+                            isEmergency: isEmergency// isEmergencyを使用
+                            
                         )
+
                         reservationDate = reservation.reservationDate
                         reservationPlace = reservation.reservationPlace
                         reservationTime = reservation.reservationTime
