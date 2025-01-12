@@ -12,7 +12,7 @@ struct ReservationFormView: View {
     @Binding var isEmergency: Bool
     @Binding var mapRegion: MKCoordinateRegion // オプショナル型を削除
     @Binding var selectedAddress: String // オプショナル型を削除
-
+    
     
     @State private var selectedDate = Date()
     @State private var selectedHour = 9
@@ -20,10 +20,26 @@ struct ReservationFormView: View {
     @State private var meetingPlace = ""
     @State private var placeDetails = ""
     @State private var additionalNotes = ""
-   // @State private var mapRegion = MKCoordinateRegion(
+    @State private var post1 = ""
+    @State private var post2 = ""
+    @State private var building = ""
+    @State private var address = ""
+    @State private var locationSearch = ""
+    @State private var memo = ""
+    @State private var selectedCategories: [String] = []
+    @State private var support = ""
+    
+    let categories = [
+        "医療", "公共機関・行政",
+        "学校・教育", "職場・ビジネス",
+        "日常生活", "エンタメ",
+        "プライベート", "オンライン"
+    ]
+    
+    // @State private var mapRegion = MKCoordinateRegion(
     //    center: CLLocationCoordinate2D(latitude: 40.6032, longitude: 140.4648), // 青森県弘前市
-   //     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-   // )
+    //     span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    // )
     //@State private var selectedAddress = ""
     
     let hours = Array(9...21)
@@ -42,16 +58,46 @@ struct ReservationFormView: View {
                 Section(header: Text("待ち合わせ時間")) {
                     TimePickerView(reservationTime: $reservationTime)
                 }
-                
-                
-                
-                
-                
-                
-                Section(header: Text("待ち合わせ場所")) {
-                    TextField("待ち合わせ場所", text: $meetingPlace)
+                Section(header: Text("待ち合わせ予約項目").font(.footnote)) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("待ち合わせ場所").font(.footnote)
+                        TextField("待ち合わせ場所", text: $meetingPlace).textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("待ち合わせ場所(詳細)").font(.footnote)
+                        TextField("詳細", text: $placeDetails).textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        
+                        
+                        Text("郵便番号").font(.footnote)
+                        HStack {
+                            
+                            TextField("000",text: $post1)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 60)
+                            Text("-")
+                            TextField("0000",text: $post2)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 80)
+                        }
+                        Text("住所").font(.footnote)
+                        TextField("住所",text: $address)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("建物名").font(.footnote)
+                        TextField("建物名・会社名・部屋番号", text: $building)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("待ち合わせに関するメモ").font(.footnote)
+                        TextField("メモを入力", text: $memo)
+                        
+                    }
+                    //                    .padding()
+                    //                    .background(Color(UIColor.systemGray6))
+                    //                    .cornerRadius(8)
+                    
                 }
-                Section(header: Text("地図")) {
+                Section(header: Text("地図").font(.footnote)) {
+                    TextField("場所を検索する", text: $locationSearch)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     MapSelectionView(
                         mapRegion: Binding(
                             get: { self.mapRegion ?? MKCoordinateRegion() }, // nilの場合はデフォルト値を提供
@@ -64,50 +110,76 @@ struct ReservationFormView: View {
                         meetingPlace: $meetingPlace
                     )
                 }
-                Section(header: Text("待ち合わせ場所(詳細)")) {
-                    TextField("詳細", text: $placeDetails)
-                }
                 
-                
-                
-                Section(header: Text("通訳内容")) {
-                    TextField("通訳内容", text: $additionalNotes)
-                }
-                Toggle("緊急", isOn: $isEmergency)
-                
-                HStack {
-                    Spacer()
-                    Button("予約内容を保存") {
-                        let reservation = ReservationData(
-                            reservationDate: "\(selectedDate.formatted())",
-                            reservationTime: "\(selectedHour)時\(selectedMinute)分",
-                            reservationPlace: "\(meetingPlace)",
-                            reservationDetails: "\(placeDetails)",
-                            reservationNotes: "\(additionalNotes)",
-                            isEmergency: isEmergency// isEmergencyを使用
-                            
-                        )
-
-                        reservationDate = reservation.reservationDate
-                        reservationPlace = reservation.reservationPlace
-                        reservationTime = reservation.reservationTime
-                        reservationDetails = reservation.reservationDetails
-                        reservationNotes = reservation.reservationNotes
-                        
-                        firestoreManager.saveReservation(reservation) { error in
-                            if let error = error {
-                                print("Error saving reservation: \(error.localizedDescription)")
-                            } else {
-                                print("Reservation saved successfully")
-                                dismiss()
+                Section(header: Text("通訳内容(ジャンル)").font(.headline).padding(.bottom, 5)) {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                        ForEach(categories, id: \.self) { category in
+                            Button(action: {
+                                toggleSelection(for: category)
+                            }) {
+                                Text(category)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(selectedCategories.contains(category) ? Color.green : Color(UIColor.systemGray6))
+                                    .foregroundColor(.primary)
+                                    .cornerRadius(8)
                             }
                         }
                     }
-                    Spacer()
                 }
+                
+                Section(header: Text("通訳内容").font(.headline).padding(.bottom, 5)) {
+                    TextField("通訳内容を入力", text: $additionalNotes)
+                    //                        .padding()
+                    //                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(8)
+                }
+                
+                Section(header: Text("必要なサポートがある場合（任意）").font(.headline).padding(.bottom, 5)) {
+                    TextField("サポート内容を入力", text: $support)
+                    //                        .padding()
+                    //                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(8)
+                }
+                //                    Spacer()
+                Toggle("緊急", isOn: $isEmergency)
+                Button("予約内容を保存") {
+                    let reservation = ReservationData(
+                        reservationDate: "\(selectedDate.formatted())",
+                        reservationTime: "\(selectedHour)時\(selectedMinute)分",
+                        reservationPlace: "\(meetingPlace)",
+                        reservationDetails: "\(placeDetails)",
+                        reservationNotes: "\(additionalNotes)",
+                        isEmergency: isEmergency// isEmergencyを使用
+                        
+                    )
+                    
+                    reservationDate = reservation.reservationDate
+                    reservationPlace = reservation.reservationPlace
+                    reservationTime = reservation.reservationTime
+                    reservationDetails = reservation.reservationDetails
+                    reservationNotes = reservation.reservationNotes
+                    
+                    firestoreManager.saveReservation(reservation) { error in
+                        if let error = error {
+                            print("Error saving reservation: \(error.localizedDescription)")
+                        } else {
+                            print("Reservation saved successfully")
+                            dismiss()
+                        }
+                    }
+                    
+                    // Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                .padding(.top, 20)
             }
             .navigationTitle("予約画面")
-            .navigationBarTitleDisplayMode(.inline)
+            //  .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -122,4 +194,12 @@ struct ReservationFormView: View {
             }
         }
     }
-}
+    
+    private func toggleSelection(for category: String) {
+            if selectedCategories.contains(category) {
+                selectedCategories.removeAll { $0 == category }
+            } else {
+                selectedCategories.append(category)
+            }
+        }}
+

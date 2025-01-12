@@ -73,9 +73,6 @@
 		7C8956372CFF492700283908 = {
 			isa = PBXGroup;
 			children = (
-				7C7E32F82D2461A900BB3211 /* MapSelectionView.swift */,
-				7C7E32F62D24610800BB3211 /* TimePickerView.swift */,
-				7C8956B32D1F0E5B00283908 /* CheckDetail.swift */,
 				7C8956422CFF492700283908 /* Takeit SwiftUI */,
 				7C8956412CFF492700283908 /* Products */,
 			);
@@ -119,7 +116,10 @@
 				7C8956612D0C362200283908 /* ReservationFormView.swift */,
 				7C8956672D0C36C800283908 /* SettingView.swift */,
 				7C8956652D0C368B00283908 /* UserPageView.swift */,
+				7C7E32F82D2461A900BB3211 /* MapSelectionView.swift */,
+				7C7E32F62D24610800BB3211 /* TimePickerView.swift */,
 				7C8956632D0C366E00283908 /* LeafPageView.swift */,
+				7C8956B32D1F0E5B00283908 /* CheckDetail.swift */,
 				7C89565F2D0C35EA00283908 /* HomePageView.swift */,
 				7C8956732D1BD85800283908 /* InterpreterHomePageView.swift */,
 				7C89566B2D0C387100283908 /* NotificationsPageView.swift */,
