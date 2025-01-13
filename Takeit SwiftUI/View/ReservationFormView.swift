@@ -61,33 +61,29 @@ struct ReservationFormView: View {
                 Section(header: Text("待ち合わせ予約項目").font(.footnote)) {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("待ち合わせ場所").font(.footnote)
-                        TextField("待ち合わせ場所", text: $meetingPlace).textFieldStyle(RoundedBorderTextFieldStyle())
-                        Text("待ち合わせ場所(詳細)").font(.footnote)
-                        TextField("詳細", text: $placeDetails).textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        
-                        
+                        TextField("弘前大学医学部附属病院", text: $meetingPlace).textFieldStyle(RoundedBorderTextFieldStyle())
                         Text("郵便番号").font(.footnote)
                         HStack {
                             
-                            TextField("000",text: $post1)
+                            TextField("036",text: $post1)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .frame(width: 60)
                             Text("-")
-                            TextField("0000",text: $post2)
+                            TextField("8563",text: $post2)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .frame(width: 80)
                         }
                         Text("住所").font(.footnote)
-                        TextField("住所",text: $address)
+                        TextField("青森県弘前市本町５３",text: $address)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Text("建物名").font(.footnote)
-                        TextField("建物名・会社名・部屋番号", text: $building)
+                        TextField("中央診療棟", text: $building)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Text("待ち合わせに関するメモ").font(.footnote)
-                        TextField("メモを入力", text: $memo)
+                        TextField("大学病院の入口で待ち合わせをお願いします", text: $memo)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                         
                     }
                     //                    .padding()
@@ -124,23 +120,21 @@ struct ReservationFormView: View {
                                     .background(selectedCategories.contains(category) ? Color.green : Color(UIColor.systemGray6))
                                     .foregroundColor(.primary)
                                     .cornerRadius(8)
-                                
-                                    .buttonStyle(.borderless) // これを追加
-                                
                             }
+                            .buttonStyle(.borderless) // これを追加
                         }
                     }
                 }
                 
                 Section(header: Text("通訳内容").font(.headline).padding(.bottom, 5)) {
-                    TextField("通訳内容を入力", text: $additionalNotes)
+                    TextField("インフルエンザワクチンの接種をしたい", text: $additionalNotes)
                     //                        .padding()
                     //                        .background(Color(UIColor.systemGray6))
                         .cornerRadius(8)
                 }
                 
                 Section(header: Text("必要なサポートがある場合（任意）").font(.headline).padding(.bottom, 5)) {
-                    TextField("サポート内容を入力", text: $support)
+                    TextField("〇〇アレルギーがあるのでワクチン接種前に先生に確認したい", text: $support)
                     //                        .padding()
                     //                        .background(Color(UIColor.systemGray6))
                         .cornerRadius(8)
