@@ -26,7 +26,7 @@ struct ReservationFormView: View {
     @State private var address = ""
     @State private var locationSearch = ""
     @State private var memo = ""
-    @State private var selectedCategories: [String] = []
+    @State private var selectedCategories: Set<String> = []
     @State private var support = ""
     
     let categories = [
@@ -116,6 +116,7 @@ struct ReservationFormView: View {
                         ForEach(categories, id: \.self) { category in
                             Button(action: {
                                 toggleSelection(for: category)
+                                print("Selected category: \(category)") // 選択されたボタンのテキストを出力
                             }) {
                                 Text(category)
                                     .padding()
@@ -123,6 +124,9 @@ struct ReservationFormView: View {
                                     .background(selectedCategories.contains(category) ? Color.green : Color(UIColor.systemGray6))
                                     .foregroundColor(.primary)
                                     .cornerRadius(8)
+                                
+                                    .buttonStyle(.borderless) // これを追加
+                                
                             }
                         }
                     }
@@ -196,10 +200,10 @@ struct ReservationFormView: View {
     }
     
     private func toggleSelection(for category: String) {
-            if selectedCategories.contains(category) {
-                selectedCategories.removeAll { $0 == category }
-            } else {
-                selectedCategories.append(category)
-            }
-        }}
-
+        if selectedCategories.contains(category) {
+            selectedCategories.remove(category) // 選択解除
+        } else {
+            selectedCategories.insert(category) // 新規選択
+        }
+    }
+}
