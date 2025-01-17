@@ -9,10 +9,13 @@ struct HomePageView: View {
     @State private var reservationNotes = ""
     @State private var showReservationForm = false
     @State private var isEmergency = false
+    @State private var isDeal = false
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 40.6032, longitude: 140.4648), // 初期値
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
+    
+    
 
     @State private var selectedAddress = ""
 
@@ -146,8 +149,10 @@ struct HomePageView: View {
                 reservationDetails: $reservationDetails,
                 reservationNotes: $reservationNotes,
                 isEmergency: $isEmergency, // State変数を渡す
+                isDeal: $isDeal,
                 mapRegion: $mapRegion, // mapRegionを渡す
-                selectedAddress: $selectedAddress // selectedAddressを渡す
+                selectedAddress: $selectedAddress// selectedAddressを渡す
+                
             )
         }
     }

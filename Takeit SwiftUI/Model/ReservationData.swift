@@ -8,4 +8,5 @@ struct ReservationData: Identifiable, Codable {
     var reservationDetails: String
     var reservationNotes: String
     var isEmergency: Bool
+    var isDeal: Bool
 }

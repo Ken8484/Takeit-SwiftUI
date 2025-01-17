@@ -10,6 +10,7 @@ struct ReservationFormView: View {
     @Binding var reservationDetails: String
     @Binding var reservationNotes: String
     @Binding var isEmergency: Bool
+    @Binding var isDeal: Bool
     @Binding var mapRegion: MKCoordinateRegion // オプショナル型を削除
     @Binding var selectedAddress: String // オプショナル型を削除
     
@@ -128,15 +129,12 @@ struct ReservationFormView: View {
                 
                 Section(header: Text("通訳内容").font(.headline).padding(.bottom, 5)) {
                     TextField("インフルエンザワクチンの接種をしたい", text: $additionalNotes)
-                    //                        .padding()
-                    //                        .background(Color(UIColor.systemGray6))
                         .cornerRadius(8)
                 }
                 
                 Section(header: Text("必要なサポートがある場合（任意）").font(.headline).padding(.bottom, 5)) {
                     TextField("〇〇アレルギーがあるのでワクチン接種前に先生に確認したい", text: $support)
-                    //                        .padding()
-                    //                        .background(Color(UIColor.systemGray6))
+                  
                         .cornerRadius(8)
                 }
                 //                    Spacer()
@@ -148,8 +146,8 @@ struct ReservationFormView: View {
                         reservationPlace: "\(meetingPlace)",
                         reservationDetails: "\(placeDetails)",
                         reservationNotes: "\(additionalNotes)",
-                        isEmergency: isEmergency// isEmergencyを使用
-                        
+                        isEmergency: isEmergency,// isEmergencyを使用
+                        isDeal: isDeal
                     )
                     
                     reservationDate = reservation.reservationDate
@@ -177,7 +175,6 @@ struct ReservationFormView: View {
                 .padding(.top, 20)
             }
             .navigationTitle("予約画面")
-            //  .navigationBarTitleDisplayMode(.inline)
         }
     }
     
