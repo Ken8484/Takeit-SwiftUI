@@ -105,17 +105,7 @@ struct InterpreterHomePageView: View {
         }
         .padding()
         .sheet(isPresented: $showReservationForm) {
-            ReservationFormView(
-                reservationDate: $reservationDate,
-                reservationTime: $reservationTime,
-                reservationPlace: $reservationPlace,
-                reservationDetails: $reservationDetails,
-                reservationNotes: $reservationNotes,
-                isEmergency: $isEmergency, // State変数を渡す
-                isDeal: $isDeal,
-                mapRegion: $mapRegion, // mapRegionを渡す
-                selectedAddress: $selectedAddress // selectedAddressを渡す
-            )
+            ReservationFormView()
         }
         .onAppear{
             fetchReservations()
