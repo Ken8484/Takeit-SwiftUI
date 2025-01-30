@@ -43,8 +43,8 @@ struct ReservationFormView: View {
                 
                 // 時間セクション
                 Section(header: Text("待ち合わせ時間")) {
-                                TimePickerView(reservationTime: $reservationTime)
-                            }
+                    TimePickerView(reservationTime: $reservationTime)
+                }
                 
                 // 待ち合わせ場所セクション
                 Section(header: Text("待ち合わせ予約項目")) {
@@ -152,22 +152,10 @@ struct ReservationFormView: View {
     
     // 予約内容を保存
     private func saveReservation() {
-        var dateFormatter: DateFormatter {
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ja_JP") // 日本語形式
-            formatter.dateStyle = .medium // 例: 2025年1月24日
-            formatter.timeStyle = .none // 時間は表示しない
-            return formatter
-        }
         
-        var formattedTime: String {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "HH:mm" // 24時間形式で時:分
-                return formatter.string(from: reservationTime)
-            }
         let reservation = ReservationData(
-            reservationDate: "\(dateFormatter.string(from: selectedDate))",
-            reservationTime: "\(dateFormatter.string(from: reservationTime))",
+            reservationDate: selectedDate, // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
+            reservationTime: reservationTime,  // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
             reservationPlace: meetingPlace,
             reservationPost1: post1,
             reservationDetails: additionalNotes,

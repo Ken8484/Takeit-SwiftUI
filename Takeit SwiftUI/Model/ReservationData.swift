@@ -2,10 +2,10 @@ import Foundation
 
 struct ReservationData: Identifiable, Codable {
     var id = UUID()
-    var reservationDate: String
-    var reservationTime: String
+    var reservationDate: Date
+    var reservationTime: Date
     var reservationPlace: String
-    var reservationpost1: String
+    var reservationPost1: String
     var reservationDetails: String
     var reservationNotes: String
     var isEmergency: Bool

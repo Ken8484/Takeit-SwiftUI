@@ -9,9 +9,9 @@ struct UserPageView: View {
     @State private var phoneNumber: String = "0902222333"
     @State private var email: String = "taro@gmail.com"
     @State private var userID: String = "Taro123"
-
+    
     @State private var isEditing: Bool = false // 編集モードかどうか
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -25,7 +25,7 @@ struct UserPageView: View {
                     UserInfoRow(label: "メールアドレス", value: $email, isEditing: isEditing)
                     UserInfoRow(label: "ユーザーID", value: $userID, isEditing: isEditing)
                 }
-
+                
                 Button(action: {
                     isEditing.toggle() // 編集モードを切り替え
                 }) {
@@ -47,7 +47,7 @@ struct UserInfoRow: View {
     let label: String
     @Binding var value: String
     let isEditing: Bool // 編集モードかどうか
-
+    
     var body: some View {
         HStack {
             Text(label)

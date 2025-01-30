@@ -15,7 +15,7 @@ struct InterpreterHomePageView: View {
         center: CLLocationCoordinate2D(latitude: 40.6032, longitude: 140.4648), // 初期値
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-
+    
     @State private var selectedAddress = ""
     
     private let firestoreManager = FirestoreManager()
@@ -97,9 +97,9 @@ struct InterpreterHomePageView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             List(reservations) { reservation in
                 HStack {
-                    Text (reservation.reservationDate)
+                    Text(reservationDate)
                         .foregroundStyle (Color.gray)
-                    Text (reservation.reservationPlace)
+                    Text (reservationPlace)
                 }
             }
         }

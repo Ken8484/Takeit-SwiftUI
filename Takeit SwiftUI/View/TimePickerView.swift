@@ -1,33 +1,33 @@
 import SwiftUI
 
 struct TimePickerView: View {
-    @Binding var reservationTime: String
+    @Binding var reservationTime: Date
     let hours = Array(9...21)
     let minutes = Array(0..<60).filter { $0 % 5 == 0 }
-
+    
     var body: some View {
         VStack {
+            // 時間を選択するPicker
             Picker("時間", selection: Binding(
                 get: {
-                    Int(reservationTime.split(separator: "時").first ?? "9") ?? 9
+                    Calendar.current.component(.hour, from: reservationTime)
                 },
                 set: { newHour in
-                    let currentMinute = Int(reservationTime.split(separator: "時").last?.split(separator: "分").first ?? "0") ?? 0
-                    reservationTime = "\(newHour)時\(currentMinute)分"
+                    updateDate(hour: newHour, minute: Calendar.current.component(.minute, from: reservationTime))
                 }
             )) {
                 ForEach(hours, id: \.self) { hour in
                     Text("\(hour)時").tag(hour)
                 }
             }
-
+            
+            // 分を選択するPicker
             Picker("分", selection: Binding(
                 get: {
-                    Int(reservationTime.split(separator: "時").last?.split(separator: "分").first ?? "0") ?? 0
+                    Calendar.current.component(.minute, from: reservationTime)
                 },
                 set: { newMinute in
-                    let currentHour = Int(reservationTime.split(separator: "時").first ?? "9") ?? 9
-                    reservationTime = "\(currentHour)時\(newMinute)分"
+                    updateDate(hour: Calendar.current.component(.hour, from: reservationTime), minute: newMinute)
                 }
             )) {
                 ForEach(minutes, id: \.self) { minute in
@@ -35,5 +35,13 @@ struct TimePickerView: View {
                 }
             }
         }
+    }
+    
+    // 時間と分を更新する関数
+    private func updateDate(hour: Int, minute: Int) {
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: reservationTime)
+        components.hour = hour
+        components.minute = minute
+        reservationTime = Calendar.current.date(from: components) ?? reservationTime
     }
 }

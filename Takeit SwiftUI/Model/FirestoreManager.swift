@@ -47,8 +47,8 @@ class FirestoreManager: ObservableObject {
                 let data = document.data()
                 
                 // 必要なフィールドがあるか確認
-                guard let reservationDate = data["reservationDate"] as? String,
-                      let reservationTime = data["reservationTime"] as? String,
+                guard let reservationDate = data["reservationDate"] as? Timestamp, // ← Firebaseから取得するとき、Date型はTimestampとして送信されるっぽい！なのでTimestamp型に変更してほしい！
+                      let reservationTime = data["reservationTime"] as? Timestamp, // ← Firebaseから取得するとき、Date型はTimestampとして送信されるっぽい！なのでTimestamp型に変更してほしい！
                       let reservationPlace = data["reservationPlace"] as? String,
                       let reservationPost1 = data["reservationPost1"] as? String,
                       let reservationDetails = data["reservationDetails"] as? String,
@@ -62,10 +62,10 @@ class FirestoreManager: ObservableObject {
                 
                 // ReservationData型を生成して返す
                 return ReservationData(
-                    reservationDate: reservationDate,
-                    reservationTime: reservationTime,
+                    reservationDate: reservationDate.dateValue(),
+                    reservationTime: reservationTime.dateValue(), 
                     reservationPlace: reservationPlace,
-                    reservationpost1: reservationPost1,
+                    reservationPost1: reservationPost1,
                     reservationDetails: reservationDetails,
                     reservationNotes: reservationNotes,
                     isEmergency: isEmergency,

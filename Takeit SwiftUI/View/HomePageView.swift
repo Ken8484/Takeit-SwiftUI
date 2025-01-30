@@ -108,10 +108,11 @@ struct HeaderView: View {
 }
 
 // MARK: - Reservation Info View
+
 // 現在の予約情報を表示するビュー
 struct ReservationInfoView: View {
-    @Binding var reservationDate: String
-    @Binding var reservationTime: String
+    @Binding var reservationDate: Date
+    @Binding var reservationTime: Date
     @Binding var reservationPlace: String
     @Binding var reservationNotes: String
     @Binding var showReservationForm: Bool
@@ -124,12 +125,12 @@ struct ReservationInfoView: View {
                     Text("待ち合わせ時間")
                         .foregroundColor(.gray)
                         .font(.body)
-                    Text(reservationDate)
+                    Text(reservationDate.toMonthDayString()) // ← Date型を「⚪︎月⚪︎日」の文字列に変換する関数を使う「toMonthDayString()」(これはDateに関するExtensionで定義したものだよ！)
                         .font(.system(size: 20, weight: .bold))
                         .fontWeight(.medium)
                 }
                 Spacer()
-                Text(reservationTime)
+                Text(reservationTime.toTimeString()) // ← Date型を「⚪:⚪︎」の文字列に変換する関数を使う「toTimeString()」(これはDateに関するExtensionで定義したものだよ！)
                     .font(.system(size: 50, weight: .bold))
                     .frame(alignment: .trailing)
             }
