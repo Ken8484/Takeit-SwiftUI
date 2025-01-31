@@ -15,12 +15,14 @@ struct ReservationFormView: View {
     @State private var address = "" // 住所
     @State private var locationSearch = "" // 地図検索用
     @State private var memo = "" // メモ
+    @State private var support = "" // サポート
     @State private var selectedCategories: Set<String> = [] // ジャンルの選択状態
-    @State private var additionalNotes = "" // 詳細情報
-    @State private var support = "" // 必要なサポート情報
+    @State private var Notes = "" // 詳細情報
     @State private var isEmergency = false // 緊急フラグ
     @State private var mapRegion = MKCoordinateRegion() // 地図の中心位置
     @State private var selectedAddress = "" // 選択された住所
+    @State private var DmeetingPlace = "" //
+    
     
     // ジャンルリスト
     let categories = [
@@ -49,8 +51,9 @@ struct ReservationFormView: View {
                 // 待ち合わせ場所セクション
                 Section(header: Text("待ち合わせ予約項目")) {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("待ち合わせ場所").font(.footnote)
-                        TextField("例: 弘前大学医学部附属病院", text: $meetingPlace)
+                        Text("待ち合わせ場所")
+                            .font(.footnote)
+                        TextField("例: 弘前大学医学部附属病院", text: $DmeetingPlace)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         
                         Text("郵便番号").font(.footnote)
@@ -82,12 +85,13 @@ struct ReservationFormView: View {
                 
                 // 地図セクション
                 Section(header: Text("地図")) {
-                    TextField("場所を検索する", text: $locationSearch)
+                    TextField("場所を検索する", text: $meetingPlace)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     MapSelectionView(
                         mapRegion: $mapRegion,
                         selectedAddress: $selectedAddress,
                         meetingPlace: $meetingPlace
+                        
                     )
                 }
                 
@@ -112,7 +116,7 @@ struct ReservationFormView: View {
                 
                 // 詳細情報セクション
                 Section(header: Text("通訳内容")) {
-                    TextField("例: インフルエンザワクチンの接種をしたい", text: $additionalNotes)
+                    TextField("例: インフルエンザワクチンの接種をしたい", text: $Notes)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 
@@ -152,14 +156,21 @@ struct ReservationFormView: View {
     
     // 予約内容を保存
     private func saveReservation() {
+        let selectedCategoriesArray = Array(selectedCategories) // Setを配列に変換
         
         let reservation = ReservationData(
             reservationDate: selectedDate, // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
             reservationTime: reservationTime,  // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
             reservationPlace: meetingPlace,
             reservationPost1: post1,
-            reservationDetails: additionalNotes,
-            reservationNotes: memo,
+            reservationPost2: post2,
+            DreservationPlace: DmeetingPlace,
+            reservationaddress: address,
+            reservationbuilding: building,
+            reservationNotes: Notes,
+            selectedCategories: selectedCategoriesArray,
+            reservationMemo: memo,
+            reservationSupport: support,
             isEmergency: isEmergency,
             isDeal: false // 必要に応じて更新
         )

@@ -51,8 +51,17 @@ class FirestoreManager: ObservableObject {
                       let reservationTime = data["reservationTime"] as? Timestamp, // ← Firebaseから取得するとき、Date型はTimestampとして送信されるっぽい！なのでTimestamp型に変更してほしい！
                       let reservationPlace = data["reservationPlace"] as? String,
                       let reservationPost1 = data["reservationPost1"] as? String,
-                      let reservationDetails = data["reservationDetails"] as? String,
+                      //let reservationDetails = data["reservationDetails"] as? String,
+                      let reservationPost2 = data["reservationPost2"] as? String,
+                      let reservationaddress = data["reservationaddress"] as? String,
+                      let DreservationPlace = data["DreservationPlace"] as? String,
+                      let reservationbuilding = data["reservationbuilding"] as? String,
                       let reservationNotes = data["reservationNotes"] as? String,
+                      
+                        
+                        let selectedCategories = data["selectedCategories"] as? [String],
+                      let reservationMemo = data["reservationMemo"] as? String,
+                      let reservationSupport = data["reservationSupport"] as? String,
                       let isEmergency = data["isEmergency"] as? Bool,
                       let isDeal = data["isDeal"] as? Bool
                 else {
@@ -63,11 +72,18 @@ class FirestoreManager: ObservableObject {
                 // ReservationData型を生成して返す
                 return ReservationData(
                     reservationDate: reservationDate.dateValue(),
-                    reservationTime: reservationTime.dateValue(), 
+                    reservationTime: reservationTime.dateValue(),
                     reservationPlace: reservationPlace,
                     reservationPost1: reservationPost1,
-                    reservationDetails: reservationDetails,
+                    //reservationDetails: reservationDetails,
+                    reservationPost2: reservationPost2,
+                    DreservationPlace: DreservationPlace,
+                    reservationaddress: reservationaddress,
+                    reservationbuilding: reservationbuilding,
                     reservationNotes: reservationNotes,
+                    selectedCategories: selectedCategories,
+                    reservationMemo: reservationMemo,
+                    reservationSupport: reservationSupport,
                     isEmergency: isEmergency,
                     isDeal: isDeal
                 )
