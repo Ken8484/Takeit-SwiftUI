@@ -8,12 +8,12 @@ struct ReservationFormView: View {
     // 内部状態を管理する変数
     @State private var selectedDate = Date() // 日付ピッカー用の選択日
     @State private var reservationTime = Date()// 時間
-    @State private var meetingPlace = "" // 待ち合わせ場所
+    @State private var meetingMap = "" // 地図で入力
     @State private var post1 = "" // 郵便番号の前半
     @State private var post2 = "" // 郵便番号の後半
     @State private var building = "" // 建物名
     @State private var address = "" // 住所
-    @State private var locationSearch = "" // 地図検索用
+    @State private var meetingPlace = "" // 直接入力
     @State private var memo = "" // メモ
     @State private var support = "" // サポート
     @State private var selectedCategories: Set<String> = [] // ジャンルの選択状態
@@ -53,7 +53,7 @@ struct ReservationFormView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("待ち合わせ場所")
                             .font(.footnote)
-                        TextField("例: 弘前大学医学部附属病院", text: $DmeetingPlace)
+                        TextField("例: 弘前大学医学部附属病院", text: $meetingPlace)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         
                         Text("郵便番号").font(.footnote)
@@ -85,7 +85,7 @@ struct ReservationFormView: View {
                 
                 // 地図セクション
                 Section(header: Text("地図")) {
-                    TextField("場所を検索する", text: $meetingPlace)
+                    TextField("場所を検索する", text: $meetingMap)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     MapSelectionView(
                         mapRegion: $mapRegion,
@@ -161,12 +161,12 @@ struct ReservationFormView: View {
         let reservation = ReservationData(
             reservationDate: selectedDate, // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
             reservationTime: reservationTime,  // ←ここは変数名のままでOK！保存するときはDate型で保存して、表示するときにフォーマット化するのでこのタイミングではDate型のままで保存するでOK！
-            reservationPlace: meetingPlace,
+            reservationMap: meetingMap,
             reservationPost1: post1,
             reservationPost2: post2,
-            DreservationPlace: DmeetingPlace,
-            reservationaddress: address,
-            reservationbuilding: building,
+            reservationPlace: meetingPlace,
+            reservationAddress: address,
+            reservationBuilding: building,
             reservationNotes: Notes,
             selectedCategories: selectedCategoriesArray,
             reservationMemo: memo,

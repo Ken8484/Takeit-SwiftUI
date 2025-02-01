@@ -49,12 +49,12 @@ class FirestoreManager: ObservableObject {
                 // 必要なフィールドがあるか確認
                 guard let reservationDate = data["reservationDate"] as? Timestamp, // ← Firebaseから取得するとき、Date型はTimestampとして送信されるっぽい！なのでTimestamp型に変更してほしい！
                       let reservationTime = data["reservationTime"] as? Timestamp, // ← Firebaseから取得するとき、Date型はTimestampとして送信されるっぽい！なのでTimestamp型に変更してほしい！
-                      let reservationPlace = data["reservationPlace"] as? String,
+                      let reservationMap = data["reservationMap"] as? String,
                       let reservationPost1 = data["reservationPost1"] as? String,
                       //let reservationDetails = data["reservationDetails"] as? String,
                       let reservationPost2 = data["reservationPost2"] as? String,
                       let reservationaddress = data["reservationaddress"] as? String,
-                      let DreservationPlace = data["DreservationPlace"] as? String,
+                      let reservationPlace = data["reservationPlace"] as? String,
                       let reservationbuilding = data["reservationbuilding"] as? String,
                       let reservationNotes = data["reservationNotes"] as? String,
                       
@@ -73,13 +73,12 @@ class FirestoreManager: ObservableObject {
                 return ReservationData(
                     reservationDate: reservationDate.dateValue(),
                     reservationTime: reservationTime.dateValue(),
-                    reservationPlace: reservationPlace,
+                    reservationMap: reservationMap,
                     reservationPost1: reservationPost1,
-                    //reservationDetails: reservationDetails,
                     reservationPost2: reservationPost2,
-                    DreservationPlace: DreservationPlace,
-                    reservationaddress: reservationaddress,
-                    reservationbuilding: reservationbuilding,
+                    reservationPlace: reservationPlace,
+                    reservationAddress: reservationaddress,
+                    reservationBuilding: reservationbuilding,
                     reservationNotes: reservationNotes,
                     selectedCategories: selectedCategories,
                     reservationMemo: reservationMemo,
