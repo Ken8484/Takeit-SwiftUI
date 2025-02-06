@@ -215,20 +215,37 @@ struct LeafPageView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("待ち合わせ場所(地図)")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                    Text(reservationPlace)
-                        .font(.title3)
-                }
-                
-                VStack(alignment: .leading, spacing: 5) {
                     Text("郵便番号(前半)")
                         .foregroundColor(.gray)
                         .font(.body)
                     Text(reservationPost1)
                         .font(.title3)
                 }
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("郵便番号(後半)")
+                        .foregroundColor(.gray)
+                        .font(.body)
+                    Text(reservationPost2)
+                        .font(.title3)
+                }
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("待ち合わせ場所(地図)")
+                        .foregroundColor(.gray)
+                        .font(.body)
+                    Text(reservationMap)
+                        .font(.title3)
+                }
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("建物住所")
+                        .foregroundColor(.gray)
+                        .font(.body)
+                    Text(reservationBuilding)
+                        .font(.title3)
+                }
+            
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("通訳する際に必要なサポート")
@@ -238,29 +255,6 @@ struct LeafPageView: View {
                         .font(.title3)
                 }
                 
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("郵便番号(後半)")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                    Text(reservationPost2)
-                        .font(.title3)
-                }
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("建物住所")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                    Text(reservationPost2)
-                        .font(.title3)
-                }
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("郵便番号(後半)")
-                        .foregroundColor(.gray)
-                        .font(.body)
-                    Text(reservationPost2)
-                        .font(.title3)
-                }
                 
                 // 地図ボタンと詳細確認ボタン
             }

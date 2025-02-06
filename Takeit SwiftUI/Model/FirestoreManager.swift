@@ -53,9 +53,9 @@ class FirestoreManager: ObservableObject {
                       let reservationPost1 = data["reservationPost1"] as? String,
                       //let reservationDetails = data["reservationDetails"] as? String,
                       let reservationPost2 = data["reservationPost2"] as? String,
-                      let reservationaddress = data["reservationaddress"] as? String,
+                      let reservationAddress = data["reservationAddress"] as? String,
                       let reservationPlace = data["reservationPlace"] as? String,
-                      let reservationbuilding = data["reservationbuilding"] as? String,
+                      let reservationBuilding = data["reservationBuilding"] as? String,
                       let reservationNotes = data["reservationNotes"] as? String,
                       
                         
@@ -77,8 +77,8 @@ class FirestoreManager: ObservableObject {
                     reservationPost1: reservationPost1,
                     reservationPost2: reservationPost2,
                     reservationPlace: reservationPlace,
-                    reservationAddress: reservationaddress,
-                    reservationBuilding: reservationbuilding,
+                    reservationAddress: reservationAddress,
+                    reservationBuilding: reservationBuilding,
                     reservationNotes: reservationNotes,
                     selectedCategories: selectedCategories,
                     reservationMemo: reservationMemo,
