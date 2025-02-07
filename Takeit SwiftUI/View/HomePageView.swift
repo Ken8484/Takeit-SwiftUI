@@ -157,6 +157,7 @@ struct ReservationInfoView: View {
             HStack(spacing: 10) {
                 Button(action: {
                     // 地図を見るアクション
+                    
                 }) {
                     HStack {
                         Image(systemName: "map")
@@ -168,6 +169,8 @@ struct ReservationInfoView: View {
                     .background(Color.green.opacity(0.2))
                     .cornerRadius(8)
                 }
+                
+                
                 
                 Button(action: {
                     // フォームの表示状態を切り替え
@@ -183,6 +186,7 @@ struct ReservationInfoView: View {
                     .background(Color.green.opacity(0.2))
                     .cornerRadius(8)
                 }
+                
             }
         }
         .padding()
@@ -193,6 +197,26 @@ struct ReservationInfoView: View {
     }
 }
 
+
+
+
+struct Details: View {
+    var body: some View {
+        NavigationStack {
+          
+                NavigationLink(destination: CheckDetails()) {
+                    Text("Check Details へ移動")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                
+            }
+            .navigationTitle("ホーム")
+        }
+    }
+}
 // MARK: - Button Panel
 // 予約関連の操作ボタンを表示するパネル
 struct ButtonPanel: View {

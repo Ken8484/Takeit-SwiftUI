@@ -57,9 +57,7 @@ class FirestoreManager: ObservableObject {
                       let reservationPlace = data["reservationPlace"] as? String,
                       let reservationBuilding = data["reservationBuilding"] as? String,
                       let reservationNotes = data["reservationNotes"] as? String,
-                      
-                        
-                        let selectedCategories = data["selectedCategories"] as? [String],
+                      let selectedCategories = data["selectedCategories"] as? [String],
                       let reservationMemo = data["reservationMemo"] as? String,
                       let reservationSupport = data["reservationSupport"] as? String,
                       let isEmergency = data["isEmergency"] as? Bool,

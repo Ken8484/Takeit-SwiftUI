@@ -18,7 +18,7 @@ struct LeafPageView: View {
     @State private var reservationDate = ""
     @State private var reservationTime = ""
     @State private var reservationPlace = ""
-    //@State private var reservationDetails = ""
+   
     @State private var reservationNotes = ""
     @State private var showReservationForm = false
     @State private var isEmergency = false
