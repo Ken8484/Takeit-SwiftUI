@@ -30,9 +30,6 @@ struct LeafPageView: View {
     @State private var mapRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 40.6032, longitude: 140.4648), // 初期値
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        
-        
-    
     )
     
     

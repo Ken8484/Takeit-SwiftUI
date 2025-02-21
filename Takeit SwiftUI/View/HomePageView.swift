@@ -34,52 +34,55 @@ struct HomePageView: View {
     @State private var selectedAddress = ""
     
     var body: some View {
-        VStack(spacing: 20) {
-            // ヘッダー部分のビュー
-            HeaderView(isEmergency: .constant(latestReservation?.isEmergency ?? false))
-            
-            // 現在の予約情報を表示するビュー
-            if let reservation = latestReservation {
-                ReservationInfoView(
-                    reservationDate: .constant(reservation.reservationDate),
-                    reservationTime: .constant(reservation.reservationTime),
-                    reservationPlace: .constant(reservation.reservationPlace),
-                    reservationNotes: .constant(reservation.reservationNotes),
-                    showReservationForm: .constant(false)
-                )
-            } else {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("現在予約はされていません")
-                        .foregroundColor(.gray)
-                        .frame(maxWidth: .infinity, minHeight: 185, alignment: .leading) // 高さを固定
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
+        
+        NavigationStack {
+            VStack(spacing: 20) {
+                // ヘッダー部分のビュー
+                HeaderView(isEmergency: .constant(latestReservation?.isEmergency ?? false))
+                
+                // 現在の予約情報を表示するビュー
+                if let reservation = latestReservation {
+                    ReservationInfoView(
+                        reservationDate: .constant(reservation.reservationDate),
+                        reservationTime: .constant(reservation.reservationTime),
+                        reservationPlace: .constant(reservation.reservationPlace),
+                        reservationNotes: .constant(reservation.reservationNotes),
+                        showReservationForm: .constant(false)
+                    )
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("現在予約はされていません")
+                            .foregroundColor(.gray)
+                            .frame(maxWidth: .infinity, minHeight: 185, alignment: .leading) // 高さを固定
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                    }
+                    
                 }
                 
+                // ボタンパネルのビュー
+                ButtonPanel(showReservationForm: $showReservationForm)
+                
+                // 他の予約情報を一覧で表示するビュー
+                OtherReservationsView()
             }
-            
-            // ボタンパネルのビュー
-            ButtonPanel(showReservationForm: $showReservationForm)
-            
-            // 他の予約情報を一覧で表示するビュー
-            OtherReservationsView()
-        }
-        .padding()
-        .sheet(isPresented: $showReservationForm) {
-            // 予約フォームビューをモーダル表示
-            ReservationFormView()
-        }
-        .onAppear {
-            // Firestoreからデータを取得
-            firestoreManager.fetchReservations { reservations, error in
-                if let error = error {
-                    print("Error fetching reservations: \(error.localizedDescription)")
-                } else if let reservations = reservations, !reservations.isEmpty {
-                    firestoreManager.reservationList = reservations
-                    latestReservation = reservations.first // 最初の予約を選択
+            .padding()
+            .sheet(isPresented: $showReservationForm) {
+                // 予約フォームビューをモーダル表示
+                ReservationFormView()
+            }
+            .onAppear {     // onAppearは画面が表示された時に使われる
+                // Firestoreからデータを取得
+                firestoreManager.fetchReservations { reservations, error in
+                    if let error = error {
+                        print("Error fetching reservations: \(error.localizedDescription)")
+                    } else if let reservations = reservations, !reservations.isEmpty {
+                        firestoreManager.reservationList = reservations
+                        latestReservation = reservations.first // 最初の予約を選択
+                    }
                 }
             }
         }
@@ -170,12 +173,7 @@ struct ReservationInfoView: View {
                     .cornerRadius(8)
                 }
                 
-                
-                
-                Button(action: {
-                    // フォームの表示状態を切り替え
-                    showReservationForm.toggle()
-                }) {
+                NavigationLink(destination: CheckDetails()) {
                     HStack {
                         Image(systemName: "info.circle")
                         Text("詳細を確認する")

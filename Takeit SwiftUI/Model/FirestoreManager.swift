@@ -28,7 +28,9 @@ class FirestoreManager: ObservableObject {
     // Firestoreから予約データを取得するメソッド
     func fetchReservations(completion: @escaping ([ReservationData]?, Error?) -> Void) {
         // Firestoreの"reservations"コレクションから全ドキュメントを取得
-        db.collection("reservations").getDocuments { snapshot, error in
+        
+        
+        db.collection("reservations").order(by: "reservationDate", descending: false).getDocuments { snapshot, error in
             if let error = error {
                 // エラーがあればcompletionで返す
                 completion(nil, error)
@@ -40,6 +42,10 @@ class FirestoreManager: ObservableObject {
                 completion([], nil)
                 return
             }
+            
+            let now = Date() // 現在の日付
+            
+            
             
             // ドキュメントをReservationData型に変換
             let reservations = documents.compactMap { document -> ReservationData? in
@@ -88,6 +94,7 @@ class FirestoreManager: ObservableObject {
             
             // 正常にデータを取得した場合はcompletionで返す
             completion(reservations, nil)
+            
         }
     }
 }
