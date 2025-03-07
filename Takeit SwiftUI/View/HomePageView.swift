@@ -158,10 +158,7 @@ struct ReservationInfoView: View {
             
             // 地図ボタンと詳細確認ボタン
             HStack(spacing: 10) {
-                Button(action: {
-                    // 地図を見るアクション
-                    
-                }) {
+                NavigationLink(destination: Mapdisplay()) {
                     HStack {
                         Image(systemName: "map")
                         Text("地図を見る")
@@ -172,6 +169,7 @@ struct ReservationInfoView: View {
                     .background(Color.green.opacity(0.2))
                     .cornerRadius(8)
                 }
+            
                 
                 NavigationLink(destination: CheckDetails()) {
                     HStack {

@@ -6,6 +6,9 @@ struct MapSelectionView: View {
     @Binding var selectedAddress: String
     @Binding var meetingPlace: String
 
+    // 青森県弘前市の座標を初期値に設定
+    private let initialLocation = CLLocationCoordinate2D(latitude: 40.6031, longitude: 140.4648)
+
     // マーカーのリスト
     private var annotationItems: [AnnotatedLocation] {
         [AnnotatedLocation(coordinate: mapRegion.center)]
@@ -22,6 +25,13 @@ struct MapSelectionView: View {
                 MapMarker(coordinate: location.coordinate)
             }
             .frame(height: 200)
+            .onAppear {
+                // 初期表示時に青森県弘前市を設定
+                mapRegion = MKCoordinateRegion(
+                    center: initialLocation,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
+            }
             .gesture(
                 TapGesture().onEnded { _ in
                     let locationCoordinate = mapRegion.center
@@ -59,5 +69,3 @@ struct AnnotatedLocation: Identifiable {
     let id = UUID() // 一意の識別子
     let coordinate: CLLocationCoordinate2D
 }
-
-
